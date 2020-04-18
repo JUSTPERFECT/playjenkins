@@ -4,6 +4,7 @@ pipeline {
     registry = "justperfect/k8s-jenkins"
     registryCredential = 'dockerhub'
     dockerImage = ""
+    RELEASE_VERSION = $BUILD_NUMBER
   }
 
   agent any
@@ -18,7 +19,7 @@ pipeline {
     stage('Build image') {
       steps{
         script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          dockerImage = docker.build registry + ":"+$RELEASE_VERSION
         }
       }
     }
@@ -38,7 +39,13 @@ pipeline {
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
-
+    stage('Build image') {
+      steps{
+        script {
+          sh "sed -i 's/RELEASE_VERSION/$RELEASE_VERSION/g' myweb.yaml"
+        }
+      }
+    }
     stage('Deploy App') {
       steps {
         script {
