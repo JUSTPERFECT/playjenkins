@@ -4,7 +4,7 @@ pipeline {
     registry = "justperfect/k8s-jenkins"
     registryCredential = 'dockerhub'
     dockerImage = ""
-    RELEASE_VERSION = env.TAG_NAME
+    RELEASE_VERSION = 5
   }
 
   agent any
@@ -19,7 +19,7 @@ pipeline {
     stage('Build image') {
       steps{
         script {
-          dockerImage = docker.build registry + ":"+$RELEASE_VERSION
+          dockerImage = docker.build registry + ":$RELEASE_VERSION"
         }
       }
     }
@@ -36,7 +36,7 @@ pipeline {
 
     stage('Remove Unused docker image') {
       steps{
-        sh "docker rmi $registry:$BUILD_NUMBER"
+        sh "docker rmi $registry:$RELEASE_VERSION"
       }
     }
     stage('Build image') {
