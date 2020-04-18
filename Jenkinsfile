@@ -4,7 +4,7 @@ pipeline {
     registry = "justperfect/k8s-jenkins"
     registryCredential = 'dockerhub'
     dockerImage = ""
-    RELEASE_VERSION = $BUILD_NUMBER
+    RELEASE_VERSION = env.TAG_NAME
   }
 
   agent any
