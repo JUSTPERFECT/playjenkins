@@ -16,7 +16,7 @@ spec:
         app: myweb
     spec:
       containers:
-      - image: justperfect/k8s-jenkins:1
+      - image: justperfect/k8s-jenkins:RELEASE_VERSION
         imagePullPolicy: Always
         name: myweb
 ---
