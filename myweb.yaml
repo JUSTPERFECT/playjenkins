@@ -16,7 +16,7 @@ spec:
         app: myweb
     spec:
       containers:
-      - image: saptaktw/endgame:1
+      - image: justperfect/k8s-jenkins:1
         imagePullPolicy: Always
         name: myweb
 ---
