@@ -39,7 +39,7 @@ pipeline {
         sh "docker rmi $registry:$RELEASE_VERSION"
       }
     }
-    stage('Build image') {
+    stage('pull latest image') {
       steps{
         script {
           sh "sed -i 's/RELEASE_VERSION/$RELEASE_VERSION/g' myweb.yaml"
